@@ -63,6 +63,6 @@ Callbacks has an information of message and that is passed in information argume
 
 `fBotecoBo.output(text)` - This will print the fBotecoBo.data on console and send a message with this in bot output channel.
 
-#Discord:
+# Discord:
 
 https://discord.gg/sPsp7qv
