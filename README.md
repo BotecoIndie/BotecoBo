@@ -1,3 +1,5 @@
+### BotecoBo  - V 1.0.0
+
 Public repository of the bot previously developed by GoldenBunny for BotecoIndie.
 
 ## Discord functions
@@ -60,3 +62,7 @@ Callbacks has an information of message and that is passed in information argume
 `fBotecoBo.changeUserColor(uid, role)` - This will change the color of an user(specified by his id in uid field) to an role color specified in role field.
 
 `fBotecoBo.output(text)` - This will print the fBotecoBo.data on console and send a message with this in bot output channel.
+
+Discord:
+
+https://discord.gg/sPsp7qv
