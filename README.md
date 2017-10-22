@@ -1,3 +1,5 @@
+Public repository of the bot previously developed by GoldenBunny for BotecoIndie.
+
 ## Discord functions
 `fDiscord.roleGetNameByID(roleID)` - With this functon you can get the name of a role by id(specified in roleID).
 
