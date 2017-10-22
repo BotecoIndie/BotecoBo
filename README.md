@@ -49,7 +49,7 @@ Public repository of the bot previously developed by GoldenBunny for BotecoIndie
 
 `fBotecoBo.updateColorFile()` - This will update "colors.jpg" file(that contains the colors stored by fBotecoBo.data.colors member).
 
-`fBotecoBo.commandAdd(information, callback)` - This will register a command in bot. Information is an object with "name", "description" and "staffOnly" keys. The callback function is specified in callback field.
+`fBotecoBo.commandAdd(information, callback)` - This will register a command in bot. Information is an object with "name", "description", "staffOnly" and "callback" keys.
 
 `fBotecoBo.commandRemove(command)` - This will remove determined command by name specified in fBotecoBo.commandAdd() function.
 
