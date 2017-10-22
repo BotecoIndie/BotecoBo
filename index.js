@@ -282,29 +282,36 @@ var fBotecoBo = {
             userID: uid,
             roleID: fDiscord.roleGetIDByName(role)
         };
-        for (i = 0; i < userRoles.length; ++i) {
-            for (i = 0; i < userRoles.length; ++i) {
-                if (fBotecoBo.data.colors.indexOf(userRoles[i].id) == -1) {
-                    var obj = {
-                        serverID: fBotecoBo.data.currentServer,
-                        userID: uid,
-                        roleID: userRoles[i]
-                    };
-                    bot.removeFromRole(obj, function (err, res) {
-                        if (err) {
-                            console.log(JSON.stringify(obj));
-                            fBotecoBo.output(err);
-                            throw err;
-                        }
-                    });
-                }
-            }
-            bot.addToRole(roleColor, function (err, res) {
-                if (err) {
-                    throw err;
-                }
-            });
+
+        if (roleColor.roleID == undefined)
+        {
+          return;
         }
+        for (i = 0; i < userRoles.length; ++i) {
+
+          if (fBotecoBo.data.colors.indexOf(userRoles[i]) != -1) {
+              var obj = {
+                serverID: fBotecoBo.data.currentServer,
+                userID: uid,
+                roleID: userRoles[i]
+            };
+            bot.removeFromRole(obj, function (err, res) {
+              if (err) {
+                console.log(JSON.stringify(obj));
+                fBotecoBo.output(err);
+                throw err;
+              }
+          });
+        }
+      }
+      if (role.toLowerCase() != "staff" && fBotecoBo.data.colors.indexOf(roleColor.roleID) != -1)
+        {
+          bot.addToRole(roleColor, function (err, res) {
+            if (err) {
+              throw err;
+              }
+        });
+      }
     },
     output: function (text) {
         bot.sendMessage({
@@ -422,18 +429,20 @@ bot.on('ready', function (event) {
     fBotecoBo.commandAdd({
         name: "say",
         description: "Faz o bot exibir uma mensagem. Uso: !say Msg",
-        staffOnly: false,
+        staffOnly: true,
         callback: function (args, information) {
+          if (!fBotecoBo.checkRole("Staff", information.userID)) {
+              fBotecoBo.violation(information);
+              return;
+          }
           var msg = "";
           for (var i = 0; i < args.length; i++) {
               msg += args[i] + " ";
           }
-          if (fBotecoBo.checkRole("Staff", information.userID)) {
-              bot.sendMessage({
-                  to: information.channelID,
-                  message: msg
-              });
-          }
+          bot.sendMessage({
+              to: information.channelID,
+              message: msg
+          });
       }
       });
     fBotecoBo.commandAdd({
@@ -545,6 +554,10 @@ bot.on('ready', function (event) {
       description: "Atualiza e salva os dados do Botecobo. Uso: !updateData",
       staffOnly: true,
       callback: function (args, information) {
+        if (!fBotecoBo.checkRole("Staff", information.userID)) {
+            fBotecoBo.violation(information);
+            return;
+        }
         fBotecoBo.saveData("data.json");
         fBotecoBo.updateColorFile();
     }
