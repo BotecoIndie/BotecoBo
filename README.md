@@ -1,4 +1,4 @@
-# BotecoBo  - V 1.0.0
+# BotecoBo  - V 0.9
 
 Public repository of the bot previously developed by GoldenBunny for BotecoIndie.
 
