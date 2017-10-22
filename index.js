@@ -220,7 +220,7 @@ var fBotecoBo = {
                                 }
                             }
                         }
-                        image.write(__dirname + "/colors.jpg", function (err) {
+                        image.write(__dirname + "/colors.png", function (err) {
                             if (err) { //
                                 fBotecoBo.output(err);
                                 throw err;
@@ -395,7 +395,7 @@ bot.on('ready', function (event) {
         callback: function (args, information) {
           bot.uploadFile({
               to: information.userID,
-              file: path.resolve(__dirname, "colors.jpg"),
+              file: path.resolve(__dirname, "colors.png"),
               message: ":heart:"
           });
       }
