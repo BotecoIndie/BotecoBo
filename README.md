@@ -1,6 +1,6 @@
 # BotecoBo  - V 0.9
 
-Public repository of the bot previously developed by GoldenBunny for BotecoIndie.
+
 
 ## Utility module members
 `roleGetNameByID(roleID)` - With this function you can get the name of a role by id(specified in roleID).
