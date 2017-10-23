@@ -1,4 +1,4 @@
-roleGetNameByID(roleID) {
+function roleGetNameByID(roleID) {
     var roles = bot.servers[fBotecoBo.data.currentServer]["roles"];
     var res = undefined;
     res = roles[(typeof (roleID) != "string") ? roleID.toString() : roleID];
@@ -8,7 +8,7 @@ roleGetNameByID(roleID) {
     }
     return result;
 }
-roleGetIDByName(roleName) {
+function roleGetIDByName(roleName) {
     var roles = bot.servers[fBotecoBo.data.currentServer]["roles"];
     var keys = Object.keys(roles);
     var rid = undefined;
@@ -20,7 +20,7 @@ roleGetIDByName(roleName) {
     }
     return rid;
 }
-memberGetIDByName(username) {
+function memberGetIDByName(username) {
     console.log(bot.users);
     var keys = Object.keys(bot.servers[fBotecoBo.data.currentServer].members);
     for (i = 0; i < keys.length; ++i) {
@@ -43,29 +43,29 @@ memberGetIDByName(username) {
     }
     return undefined;
 }
-userGetRoles(userID) {
+function userGetRoles(userID) {
     return bot.servers[fBotecoBo.data.currentServer].members[userID].roles;
 }
-getMemberRoles(userID) {
+function getMemberRoles(userID) {
     return bot.servers[fBotecoBo.data.currentServer].members[userID].roles;
 }
-getRolePropertiesByName(roleName) {
+function getRolePropertiesByName(roleName) {
     return fDiscord.getRolePropertiesByID(fDiscord.roleGetIDByName(roleName));
 }
-getRolePropertiesByID(roleID) {
+function getRolePropertiesByID(roleID) {
     return bot.servers[fBotecoBo.data.currentServer].roles[roleID];
 }
-isUserMention(text) {
+function isUserMention(text) {
     if (text.substr(0, 2) == "<@") {
         return true;
         return true;
     }
     return false;
 }
-getMemberProperties(id) {
+function getMemberProperties(id) {
     return bot.servers[fBotecoBo.data.currentServer].members[id];
 }
-convertMentionToUser(text) {
+function convertMentionToUser(text) {
     var begIndex = undefined;
     var endIndex = undefined;
     for (i = 0; i < text.length; ++i) {

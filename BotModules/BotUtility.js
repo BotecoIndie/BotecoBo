@@ -31,22 +31,22 @@ var data = {
     currentServer: undefined,
     scraps: []
 }
-listenerAdd(listener) {
+function listenerAdd(listener) {
     fBotecoBo.data.listeners.push(listener);
 }
-reply(text, information) {
+function reply(text, information) {
     bot.sendMessage({
         to: information.channelID,
         message: text
     });
 }
-saveData(fname) {
+function saveData(fname) {
     var object = {};
     object["colors"] = fBotecoBo.data.colors;
     object["kickStanleyTimes"] = fBotecoBo.data.kickStanleyTimes;
     fs.writeFile(path.resolve(__dirname, fname), JSON.stringify(object, null, 4));
 }
-loadData(fname) {
+function loadData(fname) {
     var ex = fs.existsSync(path.resolve(__dirname, fname));
     if (ex) {
         var data = fs.readFileSync(path.resolve(__dirname, fname));
@@ -55,16 +55,16 @@ loadData(fname) {
         fBotecoBo.data.kickStanleyTimes = jsonP.kickStanleyTimes;
     }
 }
-bindToServer(serverID) {
+function bindToServer(serverID) {
     fBotecoBo.data.currentServer = serverID;
 }
-violation(information) {
+function violation(information) {
     bot.sendMessage({
         to: information.channelID,
         message: "`Você não tem permissão pra isso, bobinho`:heart:"
     });
 }
-updateColorFile() {
+function updateColorFile() {
     const quadSize = 200;
     console.log(fBotecoBo.data.colors.length);
     const imgWidth = quadSize * Math.ceil(Math.sqrt(fBotecoBo.data.colors.length));
@@ -130,7 +130,7 @@ updateColorFile() {
         }
     });
 }
-commandAdd(information) {
+function commandAdd(information) {
     fBotecoBo.data.commands.push({
         command: information.name,
         description: information.description,
@@ -138,7 +138,7 @@ commandAdd(information) {
         callback: information.callback
     });
 }
-commandRemove(command) {
+function commandRemove(command) {
     for (i = 0; i < fBotecoBo.data.commands.length; ++i) {
         if (fBotecoBo.data.commands[i].command == command) {
             fBotecoBo.data.commands.splice(i, 1);
@@ -146,7 +146,7 @@ commandRemove(command) {
         }
     }
 }
-process(information) {
+function process(information) {
     var message = information.message;
     message.toLowerCase();
     if (message.substr(0, 1) == "!") {
@@ -167,12 +167,12 @@ process(information) {
         item(information);
     });
 }
-checkRole(roleName, userID) {
+function checkRole(roleName, userID) {
     var rl = fDiscord.getRolePropertiesByName(roleName);
     var idx = fDiscord.getMemberRoles(userID).indexOf(rl.id);
     return idx != -1;
 }
-changeUserColor(uid, role) {
+function changeUserColor(uid, role) {
     var userRoles = fDiscord.getMemberRoles(uid);
     var roleColor = {
         serverID: fBotecoBo.data.currentServer,
@@ -208,7 +208,7 @@ changeUserColor(uid, role) {
         });
     }
 }
-output(text) {
+function output(text) {
     bot.sendMessage({
         to: "286314605163053057", // Bot Output Channel ID
         message: text
