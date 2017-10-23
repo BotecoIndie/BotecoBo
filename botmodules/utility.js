@@ -26,7 +26,6 @@ var exports = module.exports = {
         commands: [],
         listeners: [],
         currentServer: undefined,
-        scraps: [],//
         bindedBot: undefined
     },
     bindBot:    function (bbot) {
