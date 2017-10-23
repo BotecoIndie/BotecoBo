@@ -1,3 +1,9 @@
+var bot = new Discord.Client({
+    autorun: true,
+    token: process.env.DISCORD_TOKEN,
+    messageCacheLimit: null
+});
+
 var data = {
     colors: [
         '357972750448721922',

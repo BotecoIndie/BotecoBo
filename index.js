@@ -10,7 +10,7 @@ var mmBotecoBo = require("./BotModules/BotUtility.js");
 setTimeout(getRequest, 1000);
 
 function getRequest() {
-    got('alwaysonbotecobo.azurewebsites.net')
+    got('alwaysonmBotecoBo.botecobo.azurewebsites.net')
         .then(response => {
             console.log(response.body);
         })
@@ -20,14 +20,8 @@ function getRequest() {
     setTimeout(getRequest, 600000);
 }
 
-var bot = new Discord.Client({
-    autorun: true,
-    token: process.env.DISCORD_TOKEN,
-    messageCacheLimit: null
-});
-
-bot.on('ready', function (event) {
-    console.log('Logged in as %s - %s\n', bot.username, bot.id);
+mBotecoBo.bot.on('ready', function (event) {
+    console.log('Logged in as %s - %s\n', mBotecoBo.bot.username, mBotecoBo.bot.id);
     try {
         mBotecoBo.loadData("data.json");
     } catch (exception) {
@@ -47,7 +41,7 @@ bot.on('ready', function (event) {
             if (mBotecoBo.checkRole("Staff", information.userID)) {
                 if (type && value) {
                     if (type == "all") {
-                        bot.getMessages({
+                        mBotecoBo.bot.getMessages({
                             channelID: information.channelID,
                             limit: value
                         }, function (err, messageArray) {
@@ -60,7 +54,7 @@ bot.on('ready', function (event) {
                                 }
                             }
                             var i = 0;
-                            bot.deleteMessages({
+                            mBotecoBo.bot.deleteMessages({
                                 channelID: information.channelID,
                                 messageIDs: arrMsg
                             }, function (err) {
@@ -72,7 +66,7 @@ bot.on('ready', function (event) {
                             i++;
                         });
                     } else {
-                        bot.sendMessage({
+                        mBotecoBo.bot.sendMessage({
                             to: information.channelID,
                             message: "Filtragem por usuário ainda não está disponível, tudo bem? :heart:"
                         });
@@ -98,7 +92,7 @@ bot.on('ready', function (event) {
         description: "Mostra as cores disponíveis. Uso: !color",
         staffOnly: false,
         callback: function (args, information) {
-            bot.uploadFile({
+            mBotecoBo.bot.uploadFile({
                 to: information.userID,
                 file: path.resolve(__dirname, "colors.png"),
                 message: ":heart:"
@@ -110,7 +104,7 @@ bot.on('ready', function (event) {
         description: "Envia o vídeo do Caetano Veloso. Uso: !caetano",
         staffOnly: false,
         callback: function (args, information) {
-            bot.sendMessage({
+            mBotecoBo.bot.sendMessage({
                 to: information.channelID,
                 message: "https://www.youtube.com/watch?v=-MK1q9fZjeI"
             });
@@ -125,7 +119,7 @@ bot.on('ready', function (event) {
             var today = new Date();
             var timeDif = Math.abs(cookieTime.getTime() - today.getTime());
             var difDays = Math.ceil(timeDif / (1000 * 3600 * 24));
-            bot.sendMessage({
+            mBotecoBo.bot.sendMessage({
                 to: information.channelID,
                 message: "`Dias para molhar o biscoito: " + difDays + "`"
             });
@@ -133,7 +127,7 @@ bot.on('ready', function (event) {
     });
     mBotecoBo.commandAdd({
         name: "say",
-        description: "Faz o bot exibir uma mensagem. Uso: !say Msg",
+        description: "Faz o mBotecoBo.bot exibir uma mensagem. Uso: !say Msg",
         staffOnly: true,
         callback: function (args, information) {
             if (!mBotecoBo.checkRole("Staff", information.userID)) {
@@ -144,7 +138,7 @@ bot.on('ready', function (event) {
             for (var i = 0; i < args.length; i++) {
                 msg += args[i] + " ";
             }
-            bot.sendMessage({
+            mBotecoBo.bot.sendMessage({
                 to: information.channelID,
                 message: msg
             });
@@ -189,7 +183,7 @@ bot.on('ready', function (event) {
             if (args[0]) {
                 var rid = mDiscord.roleGetIDByName(args[0]);
                 if (rid) {
-                    console.log(bot.servers[mBotecoBo.data.currentServer].roles);
+                    console.log(mBotecoBo.bot.servers[mBotecoBo.data.currentServer].roles);
                     var pos = mBotecoBo.data.colors.indexOf(rid)
                     if (pos != -1) {
                         mBotecoBo.data.colors.splice(pos, 1);
@@ -207,7 +201,7 @@ bot.on('ready', function (event) {
     });
     mBotecoBo.commandAdd({
         name: "putData",
-        description: "Imprime os dados do bot no #bot_output. Uso: !putData",
+        description: "Imprime os dados do mBotecoBo.bot no #mBotecoBo.bot_output. Uso: !putData",
         staffOnly: true,
         callback: function (args, information) {
             if (!mBotecoBo.checkRole("Staff", information.userID)) {
@@ -302,7 +296,7 @@ bot.on('ready', function (event) {
 
             str += "```";
 
-            bot.sendMessage({
+            mBotecoBo.bot.sendMessage({
                 to: information.channelID,
                 message: str
             });
@@ -319,14 +313,14 @@ bot.on('ready', function (event) {
         }
     });
     mBotecoBo.updateColorFile();
-    console.log(bot.servers[mBotecoBo.data.currentServer]["roles"]);
+    console.log(mBotecoBo.bot.servers[mBotecoBo.data.currentServer]["roles"]);
 });
 
-bot.on('disconnect', function (errMsg, code) {
-    bot.connect();
+mBotecoBo.bot.on('disconnect', function (errMsg, code) {
+    mBotecoBo.bot.connect();
 });
 
-bot.on('message', function (user, userID, channelID, message, event) {
+mBotecoBo.bot.on('message', function (user, userID, channelID, message, event) {
     console.log(message);
     var information = {
         message: message,
@@ -338,10 +332,10 @@ bot.on('message', function (user, userID, channelID, message, event) {
     mBotecoBo.process(information);
 });
 
-bot.on('any', function (event) {
+mBotecoBo.bot.on('any', function (event) {
     switch (event.t) {
         case "GUILD_MEMBER_ADD":
-            bot.sendMessage({
+            mBotecoBo.bot.sendMessage({
                 to: "285851488625098752",
                 message: "A wild <@" + event.d.user.id + ">" + " appears!`"
             });
@@ -350,13 +344,13 @@ bot.on('any', function (event) {
             console.log(event.d.user.id);
             if (event.d.user.id == "234825236296499213") {
                 mBotecoBo.data.kickStanleyTimes++;
-                bot.sendMessage({
+                mBotecoBo.bot.sendMessage({
                     to: "285851488625098752",
                     message: "<@" + event.d.user.id + ">`" + " continua câncer e foi banido pela " + kickStanleyTimes + "ª vez`"
                 });
                 mBotecoBo.saveData();
             } else {
-                bot.sendMessage({
+                mBotecoBo.bot.sendMessage({
                     to: "285851488625098752",
                     message: "<@" + event.d.user.id + ">`" + " sumiu`"
                 });
