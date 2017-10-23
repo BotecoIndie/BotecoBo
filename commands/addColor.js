@@ -16,7 +16,7 @@ utility.commandAdd({
                 if (utility.data.colors.indexOf(rid) == -1) {
                     utility.data.colors.push(rid);
                     utility.updateColorFile();
-                    utility.saveData("content/data.json");
+                    utility.saveData("../content/data.json");
                     utility.reply("Consegui! A cor \"" + args[0] + "\" foi adicionada com sucesso!", information);
                 } else {
                     utility.reply("Desculpa, mas já existe uma cor chamada \"" + args[0] + "\" na listinha <:badday:273230212651548672>", information);

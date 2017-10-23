@@ -9,7 +9,7 @@ utility.commandAdd({
             utility.violation(information);
             return;
         }
-        utility.saveData("content/data.json");
+        utility.saveData("../content/data.json");
         utility.updateColorFile();
     }
 });

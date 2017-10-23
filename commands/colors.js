@@ -7,7 +7,7 @@ utility.commandAdd({
     callback: function (args, information) {
         utility.data.bindedBot.uploadFile({
             to: information.userID,
-            file: path.resolve(__dirname, "content/colors.png"),
+            file: path.resolve(__dirname, "../content/colors.png"),
             message: ":heart:"
         });
     }

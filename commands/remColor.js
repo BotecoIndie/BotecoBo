@@ -17,7 +17,7 @@ utility.commandAdd({
                 if (pos != -1) {
                     utility.data.colors.splice(pos, 1);
                     utility.updateColorFile();
-                    utility.saveData("content/data.json");
+                    utility.saveData("../content/data.json");
                     utility.reply("A cor \"" + args[0] + "\" foi removida com sucesso!", information);
                 } else {
                     utility.reply("Desculpa, não consegui encontrar nenhuma cor chamada \"" + args[0] + "\" na listinha de cores <:badday:273230212651548672>", information);
