@@ -5,7 +5,7 @@ var got = require('got'),
     fs = require("fs"),
     jimp = require("jimp");
 var mDiscord = require("./BotModules/DiscordUtility.js");
-var mmBotecoBo = require("./BotModules/BotUtility.js");
+var mBotecoBo = require("./BotModules/BotUtility.js");
 
 setTimeout(getRequest, 1000);
 
