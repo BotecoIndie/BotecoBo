@@ -1,21 +1,16 @@
-var got = require('got'),
-    Discord = require('discord.io'),
-    jsonfile = require("jsonfile"),
-    path = require("path"),
-    fs = require("fs"),
-    jimp = require("jimp");
+var deps = require("./BotModules/Deps.js");
 var mDiscord = require("./BotModules/DiscordUtility.js");
 var mBotecoBo = require("./BotModules/BotUtility.js");
 
 setTimeout(getRequest, 1000);
 
 function getRequest() {
-    got('alwaysonmBotecoBo.botecobo.azurewebsites.net')
+    deps.got('alwaysonmBotecoBo.botecobo.azurewebsites.net')
         .then(response => {
-            console.log(response.body);
+            //console.log(response.body);
         })
         .catch(error => {
-            console.log(error.response.body);
+            //console.log(error.response.body);
         });
     setTimeout(getRequest, 600000);
 }
