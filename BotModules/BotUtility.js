@@ -1,4 +1,5 @@
 var deps = require("./Deps.js")
+var discord = require("./DiscordUtility.js");
 
 module.exports = {
     bot : new deps.Discord.Client({autorun: true,
@@ -35,7 +36,7 @@ module.exports = {
     listenerAdd: function (listener) {
         fBotecoBo.data.listeners.push(listener);
     },
-    reply(text, information) {
+    reply: function(text, information) {
         bot.sendMessage({
             to: information.channelID,
             message: text
@@ -89,7 +90,7 @@ module.exports = {
                                 if (index >= fBotecoBo.data.colors.length) {
                                     break;
                                 }
-                                var roleProperties = fDiscord.getRolePropertiesByID(fBotecoBo.data.colors[index]);
+                                var roleProperties = discord.getRolePropertiesByID(fBotecoBo.data.colors[index]);
                                 if (!roleProperties) {
                                     fBotecoBo.output("No role \"" + fBotecoBo.data.colors[index] + "\" found");
                                 } else {
@@ -169,16 +170,16 @@ module.exports = {
         });
     },
     checkRole: function (roleName, userID) {
-        var rl = fDiscord.getRolePropertiesByName(roleName);
-        var idx = fDiscord.getMemberRoles(userID).indexOf(rl.id);
+        var rl = discord.getRolePropertiesByName(roleName);
+        var idx = discord.getMemberRoles(userID).indexOf(rl.id);
         return idx != -1;
     },
     changeUserColor: function (uid, role) {
-        var userRoles = fDiscord.getMemberRoles(uid);
+        var userRoles = discord.getMemberRoles(uid);
         var roleColor = {
             serverID: fBotecoBo.data.currentServer,
             userID: uid,
-            roleID: fDiscord.roleGetIDByName(role)
+            roleID: discord.roleGetIDByName(role)
         };
 
         if (roleColor.roleID == undefined) {

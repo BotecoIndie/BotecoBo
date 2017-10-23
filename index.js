@@ -5,14 +5,14 @@ var mBotecoBo = require("./BotModules/BotUtility.js");
 setTimeout(getRequest, 1000);
 
 function getRequest() {
-    deps.got('alwaysonmBotecoBo.botecobo.azurewebsites.net')
+    /*deps.got('alwaysonmBotecoBo.botecobo.azurewebsites.net')
         .then(response => {
             console.log(response.body);
         })
         .catch(error => {
             console.log(error.response.body);
         });
-    setTimeout(getRequest, 600000);
+    setTimeout(getRequest, 600000);*/
 }
 
 mBotecoBo.bot.on('ready', function (event) {

@@ -1,8 +1,9 @@
 var deps = require("./Deps.js");
+var BotecoBo = require("./BotUtility.js");
 
 module.exports = {
     roleGetNameByID: function (roleID) {
-        var roles = bot.servers[fBotecoBo.data.currentServer]["roles"];
+        var roles = BotecoBo.bot.servers[BotecoBo.data.currentServer]["roles"];
         var res = undefined;
         res = roles[(typeof (roleID) != "string") ? roleID.toString() : roleID];
         var result = undefined;
@@ -12,7 +13,7 @@ module.exports = {
         return result;
     },
     roleGetIDByName: function (roleName) {
-        var roles = bot.servers[fBotecoBo.data.currentServer]["roles"];
+        var roles = BotecoBo.bot.servers[BotecoBo.data.currentServer]["roles"];
         var keys = Object.keys(roles);
         var rid = undefined;
         for (i = 0; i < keys.length; ++i) {
@@ -24,19 +25,19 @@ module.exports = {
         return rid;
     },
     memberGetIDByName: function (username) {
-        console.log(bot.users);
-        var keys = Object.keys(bot.servers[fBotecoBo.data.currentServer].members);
+        console.log(BotecoBo.bot.users);
+        var keys = Object.keys(BotecoBo.bot.servers[BotecoBo.data.currentServer].members);
         for (i = 0; i < keys.length; ++i) {
-            var member = bot.servers[fBotecoBo.data.currentServer].members[keys[i]];
+            var member = BotecoBo.bot.servers[BotecoBo.data.currentServer].members[keys[i]];
             if (member.nick) {
                 if (member.nick == username) {
                     return member.id;
                 }
             }
         }
-        keys = Object.keys(bot.users);
+        keys = Object.keys(BotecoBo.bot.users);
         for (i = 0; i < keys.length; ++i) {
-            var member = bot.users[keys[i]];
+            var member = BotecoBo.bot.users[keys[i]];
             console.log(member);
             if (member) {
                 if (member.username == username) {
@@ -47,16 +48,16 @@ module.exports = {
         return undefined;
     },
     userGetRoles: function (userID) {
-        return bot.servers[fBotecoBo.data.currentServer].members[userID].roles;
+        return BotecoBo.bot.servers[BotecoBo.data.currentServer].members[userID].roles;
     },
     getMemberRoles: function (userID) {
-        return bot.servers[fBotecoBo.data.currentServer].members[userID].roles;
+        return BotecoBo.bot.servers[BotecoBo.data.currentServer].members[userID].roles;
     },
     getRolePropertiesByName: function (roleName) {
         return fDiscord.getRolePropertiesByID(fDiscord.roleGetIDByName(roleName));
     },
     getRolePropertiesByID: function (roleID) {
-        return bot.servers[fBotecoBo.data.currentServer].roles[roleID];
+        return BotecoBo.bot.servers[BotecoBo.data.currentServer].roles[roleID];
     },
     isUserMention: function (text) {
         if (text.substr(0, 2) == "<@") {
@@ -66,7 +67,7 @@ module.exports = {
         return false;
     },
     getMemberProperties: function (id) {
-        return bot.servers[fBotecoBo.data.currentServer].members[id];
+        return BotecoBo.bot.servers[BotecoBo.data.currentServer].members[id];
     },
     convertMentionToUser: function (text) {
         var begIndex = undefined;
