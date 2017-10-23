@@ -39,6 +39,7 @@ var bot = new Discord.Client({
     token: process.env.DISCORD_TOKEN,
     messageCacheLimit: null
 });
+
 utility.bindBot(bot);
 
 utility.data.bindedBot.on('ready', function (event) {
@@ -65,7 +66,11 @@ utility.data.bindedBot.on('message', function (user, userID, channelID, message,
         event: event,
         user: user
     };
-    utility.process(information);
+    try {
+        utility.process(information);
+    } catch(err) {
+        utility.output(err);
+    }//
 });
 
 utility.data.bindedBot.on('any', function (event) {

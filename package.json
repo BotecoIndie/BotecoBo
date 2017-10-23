@@ -3,10 +3,11 @@
     "version": "0.0.1",
     "main": "index.js",
     "dependencies": {
-        "discord.io":"*",
-        "jsonfile":"*",
-        "cluster":"*",
-        "jimp":"*",
-	"got":"*"
+        "discord.io": "*",
+        "jsonfile": "*",
+        "cluster": "*",
+        "jimp": "*",
+        "got": "*",
+        "pastebin-js": "*"
     }
 }

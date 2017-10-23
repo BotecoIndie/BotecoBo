@@ -1,4 +1,5 @@
 var utility = require("../botmodules/utility.js");
+var path = require('path');
 
 utility.commandAdd({
     name: "colors",

@@ -1,4 +1,6 @@
 var utility = require("../botmodules/utility.js");
+var pastebinAPI = require("pastebin-js"),
+    pastebin = new pastebinAPI('c529af84e0bb548edb96054219d7cbce');
 
 utility.commandAdd({
     name: "putData",
@@ -9,8 +11,21 @@ utility.commandAdd({
             utility.violation(information);
             return;
         }
-        var val = JSON.stringify(utility.data, null, 4);
-        console.log(val);
-        utility.output('```json\n' + val + "```");
+        var nData = {};
+        nData.colors = utility.data.colors;
+        nData.commands = utility.data.commands;
+        nData.kickStanleyTimes = utility.data.kickStanleyTimes;
+        var val = JSON.stringify(nData, null, 4);
+        pastebin.createPaste({
+            text: val,
+            title: "botecobo logs",
+            format: 'json',
+            privacy: 0,
+            expiration: 'N'
+        }).then(function(data) {
+            utility.output(data);
+        }).catch(function(err) {
+            throw err;
+        });
     }
 });

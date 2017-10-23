@@ -72,9 +72,7 @@ var exports = module.exports = {
         const margin = 48;
         var image = new jimp(imgWidth, imgHeight, function (err, image) {
             if (err) {
-                console.log("failure");
-                console.log(err);
-                exports.output("Jimp Error: " + err);
+                throw err;
             } else {
                 image.quality(100);
                 image.background(jimp.rgbaToInt(255, 255, 255, 255));
@@ -89,7 +87,7 @@ var exports = module.exports = {
                                 }
                                 var roleProperties = exports.getRolePropertiesByID(exports.data.colors[index]);
                                 if (!roleProperties) {
-                                    exports.output("No role \"" + exports.data.colors[index] + "\" found");
+                                    console.log("No role \"" + exports.data.colors[index] + "\" found");
                                 } else {
                                     var roleColor = jimp.intToRGBA(roleProperties.color);
                                     console.log(roleProperties.name + " : " + JSON.stringify(roleColor) + " : " + roleProperties.color);
@@ -118,7 +116,6 @@ var exports = module.exports = {
                         }
                         image.write(path.resolve(__dirname, "../content/colors.png"), function (err) {
                             if (err) {
-                                exports.output(err);
                                 throw err;
                             } else {
                                 console.log("done");
@@ -194,7 +191,6 @@ var exports = module.exports = {
             exports.data.bindedBot.removeFromRole(obj, function (err, res) {
               if (err) {
                 console.log(JSON.stringify(obj));
-                exports.output(err);
                 throw err;
               }
           });
