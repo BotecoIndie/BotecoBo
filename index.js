@@ -7,10 +7,10 @@ setTimeout(getRequest, 1000);
 function getRequest() {
     deps.got('alwaysonmBotecoBo.botecobo.azurewebsites.net')
         .then(response => {
-            //console.log(response.body);
+            console.log(response.body);
         })
         .catch(error => {
-            //console.log(error.response.body);
+            console.log(error.response.body);
         });
     setTimeout(getRequest, 600000);
 }
