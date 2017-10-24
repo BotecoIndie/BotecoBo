@@ -39,11 +39,11 @@
 
 `saveData(fname)` - Storage data in a JSON file at name specified in fname field.
 
-`loadData(fname)` - This will load data saved by fBotecoBo.saveData() function.
+`loadData(fname)` - This will load data saved by saveData() function.
 
 `bindToServer(serverID)` - This will bind bot to server specified in serverID field.
 
-`updateColorFile()` - This will update "colors.jpg" file(that contains the colors stored by fBotecoBo.data.colors member).
+`updateColorFile()` - This will update "colors.jpg" file(that contains the colors stored by data.colors member).
 
 `commandAdd(information, callback)` - This will register a command in bot. Information is an object with "name", "description", "staffOnly" and "callback" keys.
 
@@ -66,7 +66,7 @@ information - This contain the information of received message, which is:
 
 }
 
-`commandRemove(command)` - This will remove determined command by name specified in fBotecoBo.commandAdd() function.
+`commandRemove(command)` - This will remove determined command by name specified in commandAdd() function.
 
 Callbacks has an information of message and that is passed in information argument of callback.
 
@@ -76,7 +76,7 @@ Callbacks has an information of message and that is passed in information argume
 
 `changeUserColor(uid, role)` - This will change the color of an user(specified by his id in uid field) to a role color specified in role field.
 
-`output(text)` - This will print the fBotecoBo.data on console and send a message with this in bot output channel.
+`output(text)` - This will print the data on console and send a message with this in bot output channel.
 
 # Discord:
 
