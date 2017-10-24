@@ -52,7 +52,6 @@ The callback is called with following parameters:
 args        - An array that contain the arguments of the command(splitted by space).
 
 information - This contain the information of received message, which is:
-
 `{
 
   userID,     //contain the id of user
