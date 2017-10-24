@@ -62,7 +62,7 @@ information - This contain the information of received message, which is:
   
   channelID,  //contain the id of the channel in which the message has been received.
   
-  user,       //an object that has the general information of user.
+  user       //an object that has the general information of user.
 
 }
 
