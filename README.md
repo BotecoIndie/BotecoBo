@@ -46,6 +46,16 @@
 `updateColorFile()` - This will update "colors.jpg" file(that contains the colors stored by fBotecoBo.data.colors member).
 
 `commandAdd(information, callback)` - This will register a command in bot. Information is an object with "name", "description", "staffOnly" and "callback" keys.
+The callback is called with following parameters:
+args        - An array that contain the arguments of the command(splitted by space).
+information - This contain the information of received message, which is:
+`{
+  userID,     //contain the id of user
+  message,    //contain the text of message received
+  event,      //contain the event of the message.
+  channelID,  //contain the id of the channel in which the message has been received.
+  user,       //an object that has the general information of user.
+}`
 
 `commandRemove(command)` - This will remove determined command by name specified in fBotecoBo.commandAdd() function.
 
