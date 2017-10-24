@@ -47,20 +47,20 @@
 
 `commandAdd(information, callback)` - This will register a command in bot. Information is an object with "name", "description", "staffOnly" and "callback" keys.
 
-The callback is called with following parameters:
+The callback is called with the following parameters:
 
-args        - An array that contain the arguments of the command(splitted by space).
+args        - An array that contains the arguments of the command(splitted by space).
 
-information - This contain the information of received message, which is:
+information - This contains the received message information, which is:
 {
 
-  userID,     //contain the id of user
+  userID,     //contains the userid of the message
   
-  message,    //contain the text of message
+  message,    //contains the text of the message
   
-  event,      //contain the event of the message.
+  event,      //contains the event of the message
   
-  channelID,  //contain the id of the channel in which the message has been received.
+  channelID,  //contains the id of the channel in which the message has been received.
   
   user       //an object that has the general information of user.
 
@@ -77,6 +77,8 @@ Callbacks has an information of message and that is passed in information argume
 `changeUserColor(uid, role)` - This will change the color of an user(specified by his id in uid field) to a role color specified in role field.
 
 `output(text)` - This will print the data on console and send a message with this in bot output channel.
+
+For more information you can see the discord.io library documentation: https://izy521.gitbooks.io/discord-io/content/
 
 # Discord:
 
