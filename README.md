@@ -52,11 +52,11 @@ The callback is called with following parameters:
 args        - An array that contain the arguments of the command(splitted by space).
 
 information - This contain the information of received message, which is:
-`{
+{
 
   userID,     //contain the id of user
   
-  message,    //contain the text of message received
+  message,    //contain the text of message
   
   event,      //contain the event of the message.
   
@@ -64,7 +64,7 @@ information - This contain the information of received message, which is:
   
   user,       //an object that has the general information of user.
 
-}`
+}
 
 `commandRemove(command)` - This will remove determined command by name specified in fBotecoBo.commandAdd() function.
 
