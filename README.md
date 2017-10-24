@@ -1,4 +1,4 @@
-# BotecoBo  - V 0.9
+# BotecoBo  - V 1.0
 
 
 
