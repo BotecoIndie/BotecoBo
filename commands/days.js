@@ -11,7 +11,7 @@ utility.commandAdd({
         var difDays = Math.ceil(timeDif / (1000 * 3600 * 24));
         utility.data.bindedBot.sendMessage({
             to: information.channelID,
-            message: "<@!180478465659764737> " + "`Dias para molhar o biscoito: " + difDays + "`"
+            message: "`Dias para molhar o biscoito: " + difDays + "`"
         });
     }
 });
