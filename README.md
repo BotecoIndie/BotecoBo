@@ -78,6 +78,8 @@ Callbacks has an information of message and that is passed in information argume
 
 `output(text)` - This will print the data on console and send a message with this in bot output channel.
 
+For more information you can see the discord.io library documentation: https://izy521.gitbooks.io/discord-io/content/
+
 # Discord:
 
 https://discord.gg/sPsp7qv
