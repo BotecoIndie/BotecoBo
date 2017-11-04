@@ -109,3 +109,7 @@ utility.data.bindedBot.on('any', function (event) {
             }
     }
 });
+
+process.on('uncaughtException', function(err) {
+  console.log('Caught exception: ' + err);
+});
