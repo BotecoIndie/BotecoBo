@@ -86,7 +86,7 @@ utility.data.bindedBot.on('any', function (event) {
                 utility.data.kickStanleyTimes++;
                 utility.data.bindedBot.sendMessage({
                     to: "285851488625098752",
-                    message: "<@" + event.d.user.id + ">`" + " continua câncer e foi banido pela " + kickStanleyTimes + "ª vez`"
+                    message: "<@" + event.d.user.id + ">`" + " continua câncer e foi banido pela " + utility.data.kickStanleyTimes + "ª vez`"
                 });
                 utility.saveData();
             } else {

@@ -3,7 +3,7 @@ var path = require('path');
 
 utility.commandAdd({
     name: "colors",
-    description: "Mostra as cores disponíveis. Uso: !color",
+    description: "Mostra as cores disponíveis. Uso: !colors",
     staffOnly: false,
     callback: function (args, information) {
         utility.data.bindedBot.uploadFile({
