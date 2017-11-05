@@ -6,6 +6,7 @@ var got = require('got'),
 
 var setup = JSON.parse(fs.readFileSync('./setup.json'));
 var commanddir = setup.commanddir;
+
 //Load all command modules
 fs.readdir(commanddir, (err, files) => {
     if (!err) {
@@ -34,9 +35,11 @@ function getRequest() {
     setTimeout(getRequest, 600000);
 }
 
+var token = process.env.DISCORD_TOKEN || fs.readFileSync(".token",{encoding:'utf8'}).trim();
+
 var bot = new Discord.Client({
     autorun: true,
-    token: process.env.DISCORD_TOKEN,
+    token: token,
     messageCacheLimit: null
 });
 
@@ -88,7 +91,7 @@ utility.data.bindedBot.on('any', function (event) {
                     to: "285851488625098752",
                     message: "<@" + event.d.user.id + ">`" + " continua câncer e foi banido pela " + utility.data.kickStanleyTimes + "ª vez`"
                 });
-                utility.saveData("../content/data.json");
+                utility.saveData("./content/data.json");
             } else {
                 utility.data.bindedBot.sendMessage({
                     to: "285851488625098752",

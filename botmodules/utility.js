@@ -26,7 +26,9 @@ var exports = module.exports = {
         commands: [],
         listeners: [],
         currentServer: undefined,
-        bindedBot: undefined
+        bindedBot: undefined,
+        kickStanleyTimes: 10,
+        dir: process.cwd()
     },
     bindBot:    function (bbot) {
         exports.data.bindedBot = bbot;
@@ -44,12 +46,12 @@ var exports = module.exports = {
         var object = {};
         object["colors"] = exports.data.colors;
         object["kickStanleyTimes"] = exports.data.kickStanleyTimes;
-        fs.writeFile(path.resolve(__dirname, fname), JSON.stringify(object, null, 4));
+        fs.writeFile(path.resolve(exports.data.dir, fname), JSON.stringify(object, null, 4));
     },
     loadData: function (fname) {
-        var ex = fs.existsSync(path.resolve(__dirname, fname));
+        var ex = fs.existsSync(path.resolve(exports.data.dir, fname));
         if (ex) {
-            var data = fs.readFileSync(path.resolve(__dirname, fname));
+            var data = fs.readFileSync(path.resolve(exports.data.dir, fname));
             var jsonP = JSON.parse(data);
             exports.data.colors = jsonP.colors;
             exports.data.kickStanleyTimes = jsonP.kickStanleyTimes;
@@ -114,7 +116,7 @@ var exports = module.exports = {
                                 }
                             }
                         }
-                        image.write(path.resolve(__dirname, "../content/colors.png"), function (err) {
+                        image.write(path.resolve(exports.data.dir, "./content/colors.png"), function (err) {
                             if (err) {
                                 throw err;
                             } else {
