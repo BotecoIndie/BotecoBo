@@ -13,6 +13,7 @@ utility.commandAdd({
         }
         var nData = {};
         nData.colors = utility.data.colors;
+        nData.roles = utility.data.roles;
         nData.commands = utility.data.commands;
         nData.kickStanleyTimes = utility.data.kickStanleyTimes;
         var val = JSON.stringify(nData, null, 4);

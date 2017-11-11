@@ -46,6 +46,7 @@ var exports = module.exports = {
         var object = {};
         object["colors"] = exports.data.colors;
         object["kickStanleyTimes"] = exports.data.kickStanleyTimes;
+        object["roles"] = exports.data.roles;
         fs.writeFile(path.resolve(exports.data.dir, fname), JSON.stringify(object, null, 4));
     },
     loadData: function (fname) {
@@ -54,6 +55,7 @@ var exports = module.exports = {
             var data = fs.readFileSync(path.resolve(exports.data.dir, fname));
             var jsonP = JSON.parse(data);
             exports.data.colors = jsonP.colors;
+            exports.data.roles = jsonP.roles;
             exports.data.kickStanleyTimes = jsonP.kickStanleyTimes;
         }
     },
