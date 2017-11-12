@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "main": "index.js",
     "dependencies": {
-        "discord.io": "*",
+        "discord.io": "github:izy521/discord.io",
         "jsonfile": "*",
         "cluster": "*",
         "jimp": "*",
