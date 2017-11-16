@@ -81,7 +81,7 @@ utility.data.bindedBot.on('any', function (event) {
         case "GUILD_MEMBER_ADD":
             utility.data.bindedBot.sendMessage({
                 to: "285851488625098752",
-                message: "A wild <@" + event.d.user.id + ">" + " appears!`"
+                message: "Oi, <@!" + event.d.user.id + ">" + " seja bem-vindo ao BotecoIndie! :heart:"
             });
             break;
         case "GUILD_MEMBER_REMOVE":
@@ -89,13 +89,13 @@ utility.data.bindedBot.on('any', function (event) {
                 utility.data.kickStanleyTimes++;
                 utility.data.bindedBot.sendMessage({
                     to: "285851488625098752",
-                    message: "<@" + event.d.user.id + ">`" + " continua câncer e foi banido pela " + utility.data.kickStanleyTimes + "ª vez`"
+                    message: "<@" + event.d.user.id + ">" + " continua câncer e foi banido pela " + utility.data.kickStanleyTimes + "ª vez"
                 });
                 utility.saveData("./content/data.json");
             } else {
                 utility.data.bindedBot.sendMessage({
                     to: "285851488625098752",
-                    message: "<@" + event.d.user.id + ">`" + " sumiu`"
+                    message: "<@!" + event.d.user.id + ">" + " foi embora... <:badday:273230212651548672>"
                 });
             }
             break;
