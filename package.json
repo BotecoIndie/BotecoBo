@@ -3,11 +3,12 @@
     "version": "0.0.1",
     "main": "index.js",
     "dependencies": {
-        "discord.io": "github:izy521/discord.io",
-        "jsonfile": "*",
         "cluster": "*",
-        "jimp": "*",
+        "discord.io": "github:izy521/discord.io",
         "got": "*",
+        "jimp": "*",
+        "jsonfile": "*",
+        "nodemon": "^1.12.1",
         "pastebin-js": "*"
     }
 }
