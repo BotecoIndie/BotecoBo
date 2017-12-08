@@ -4,7 +4,7 @@
     "main": "index.js",
     "dependencies": {
         "cluster": "*",
-        "discord.io": "github:izy521/discord.io",
+        "discord.io": "*",
         "got": "*",
         "jimp": "*",
         "jsonfile": "*",
