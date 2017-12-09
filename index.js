@@ -1,5 +1,6 @@
+//CONSERTAR O PURGE E O COLORS
 var got = require('got'),
-    Discord = require('discord.io'),
+    Discord = require('discord.js'),
     utility = require('./botmodules/utility.js'),
     path = require("path"),
     fs = require('fs');
@@ -37,37 +38,34 @@ function getRequest() {
 
 var token = process.env.DISCORD_TOKEN || fs.readFileSync(".token",{encoding:'utf8'}).trim();
 
-var bot = new Discord.Client({
-    autorun: true,
-    token: token,
-    messageCacheLimit: null
-});
-
+var bot = new Discord.Client();
 utility.bindBot(bot);
 
-utility.data.bindedBot.on('ready', function (event) {
+
+utility.data.bindedBot.on('ready', function () {
     try {
         utility.loadData("./content/data.json");
     } catch (exception) {
 
     }
-    utility.bindToServer(event.d.guilds[0].id);
+    utility.bindToServer(bot.guilds.first().id);
     utility.updateColorFile();
-    console.log(utility.data.bindedBot.servers[utility.data.currentServer]["roles"]);
+    console.log(utility.data.bindedBot.guilds.get(utility.data.currentServer).roles.array());
 });
 
-utility.data.bindedBot.on('disconnect', function (errMsg, code) {
+utility.data.bindedBot.on('disconnect', function (closeEvent) {
     utility.data.bindedBot.connect();
 });
 
-utility.data.bindedBot.on('message', function (user, userID, channelID, message, event) {
-    console.log(message);
+utility.data.bindedBot.on('message', function (message) {
+    console.log(message.content);
     var information = {
-        message: message,
-        userID: userID,
-        channelID: channelID,
-        event: event,
-        user: user
+        message: message.content,
+        userID: message.author.id,
+        channelID: message.channel.id,
+        channel: message.channel,
+        event: 0,
+        user: message.author
     };
     try {
         utility.process(information);
@@ -76,44 +74,46 @@ utility.data.bindedBot.on('message', function (user, userID, channelID, message,
     }
 });
 
-utility.data.bindedBot.on('any', function (event) {
-    switch (event.t) {
-        case "GUILD_MEMBER_ADD":
-            utility.data.bindedBot.sendMessage({
-                to: "285851488625098752",
-                message: "Oi, <@!" + event.d.user.id + ">" + " seja bem-vindo ao BotecoIndie! :heart:"
-            });
-            break;
-        case "GUILD_MEMBER_REMOVE":
-            if (event.d.user.id == "234825236296499213") {
-                utility.data.kickStanleyTimes++;
-                utility.data.bindedBot.sendMessage({
-                    to: "285851488625098752",
-                    message: "<@!" + event.d.user.id + ">" + " continua câncer e foi banido pela " + utility.data.kickStanleyTimes + "ª vez"
-                });
-                utility.saveData("./content/data.json");
-            } else {
-                utility.data.bindedBot.sendMessage({
-                    to: "285851488625098752",
-                    message: "<@!" + event.d.user.id + ">" + " foi embora... <:badday:273230212651548672>"
-                });
-            }
-            break;
-        case "GUILD_ROLE_UPDATE":
-            if (utility.data.colors.indexOf(event.d.id) != -1) {
-                utility.updateColorFile();
-            }
-            break;
-        case "GUILD_ROLE_REMOVE":
-            var idx = utility.data.colors.indexOf(event.d.id);
-            if (idx != -1) {
-                utility.data.colors.splice(idx, 1);
-                utility.updateColorFile();
-            }
-    }
+utility.data.bindedBot.on('guildMemberAdd', function(member){
+  utility.sendMessage({
+      to: "285851488625098752",
+      message: "Oi, <@!" + member.id + ">" + " seja bem-vindo ao BotecoIndie! :heart: Que tal falar um pouco de você no <#388729820323905547> para liberar acesso total ao servidor? Estamos ansiosos para ter você conosco!"
+  });
+});
+
+utility.data.bindedBot.on('guildMemberRemove', function(member){
+  if (member.id == "234825236296499213") {
+      utility.data.kickStanleyTimes++;
+      utility.sendMessage({
+          to: "285851488625098752",
+          message: "<@!" + member.id + ">" + " continua câncer e foi banido pela " + utility.data.kickStanleyTimes + "ª vez"
+      });
+      utility.saveData("./content/data.json");
+  } else {
+      utility.sendMessage({
+          to: "285851488625098752",
+          message: "<@!" + member.id + ">" + " foi embora... <:badday:273230212651548672>"
+      });
+  }
+});
+
+utility.data.bindedBot.on('roleUpdate', function(oldRole,newRole){
+  if (utility.data.colors.indexOf(newRole.id) != -1) {
+      utility.updateColorFile();
+  }
+});
+
+utility.data.bindedBot.on('roleDelete', function(role){
+  var idx = utility.data.colors.indexOf(role.id);
+  if (idx != -1) {
+      utility.data.colors.splice(idx, 1);
+      utility.updateColorFile();
+  }
 });
 
 process.on('uncaughtException', function(err) {
   utility.output('Caught exception: ' + err.stack);
   console.log('Caught exception: ' + err.stack);
 });
+
+bot.login(token);

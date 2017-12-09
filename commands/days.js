@@ -9,7 +9,7 @@ utility.commandAdd({
         var today = new Date();
         var timeDif = Math.abs(cookieTime.getTime() - today.getTime());
         var difDays = Math.ceil(timeDif / (1000 * 3600 * 24));
-        utility.data.bindedBot.sendMessage({
+        utility.sendMessage({
             to: information.channelID,
             message: "<@!180478465659764737> " + "`Dias para molhar o biscoito: " + difDays + "`"
         });

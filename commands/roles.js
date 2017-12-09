@@ -11,7 +11,7 @@ utility.commandAdd({
       messaget += utility.roleGetNameByID(utility.data.roles[i]) + "\n";
     }
     messaget+="```";
-    utility.data.bindedBot.sendMessage({
+    utility.sendMessage({
       to: information.userID,
       message: messaget
     });

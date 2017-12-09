@@ -32,24 +32,13 @@ utility.commandAdd({
       case "add":
       if (args[1].toLowerCase() != "staff" && utility.data.roles.indexOf(roleColor.roleID) != -1)
       {
-        utility.data.bindedBot.addToRole(roleColor, function (err, res) {
-          if (err) {
-            console.log(JSON.stringify(obj));
-            throw err;
-          }
-
-        });
+        utility.data.bindedBot.guilds.get(utility.data.currentServer).members.get(roleColor.userID).addRole(roleColor.roleID).then(function(){console.log('Sucesso')});
       }
       break;
       case "remove":
       if (args[1].toLowerCase() != "staff" && utility.data.roles.indexOf(roleColor.roleID) != -1)
       {
-        utility.data.bindedBot.removeFromRole(roleColor, function (err, res) {
-          if (err) {
-            console.log(JSON.stringify(obj));
-            throw err;
-          }
-        });
+        utility.data.bindedBot.guilds.get(utility.data.currentServer).members.get(roleColor.userID).removeRole(roleColor.roleID).then(function(){console.log('Sucesso')});
       }
       break;
       default:

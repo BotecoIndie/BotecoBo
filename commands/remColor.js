@@ -12,8 +12,7 @@ utility.commandAdd({
         if (args[0]) {
             var rid = utility.roleGetIDByName(args[0]);
             if (rid) {
-                console.log(utility.data.bindedBot.servers[utility.data.currentServer].roles);
-                var pos = utility.data.colors.indexOf(rid)
+                var pos = utility.data.colors.indexOf(rid);
                 if (pos != -1) {
                     utility.data.colors.splice(pos, 1);
                     utility.updateColorFile();

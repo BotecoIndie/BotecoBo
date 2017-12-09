@@ -16,7 +16,6 @@ utility.commandAdd({
               {
                 utility.data.roles = [];
               }
-                console.log(utility.data.bindedBot.servers[utility.data.currentServer].roles);
                 var pos = utility.data.roles.indexOf(rid)
                 if (pos != -1) {
                     utility.data.roles.splice(pos, 1);

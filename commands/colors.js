@@ -6,10 +6,6 @@ utility.commandAdd({
     description: "Mostra as cores disponíveis. Uso: !colors",
     staffOnly: false,
     callback: function (args, information) {
-        utility.data.bindedBot.uploadFile({
-            to: information.userID,
-            file: path.resolve(utility.data.dir, "./content/colors.png"),
-            message: ":heart:"
-        });
+        utility.data.bindedBot.guilds.get(utility.data.currentServer).members.get(information.userID).sendFile(path.resolve(utility.data.dir, "./content/colors.png"),'colors.png',":heart:");
     }
 });

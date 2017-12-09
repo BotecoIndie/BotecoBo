@@ -1,5 +1,5 @@
 var utility = require("../botmodules/utility.js");
-
+/*
 utility.commandAdd({
     name: "purge", //
     description: "Elimina mensagens em lote. Uso: !purge all qtd",
@@ -38,7 +38,7 @@ utility.commandAdd({
                         i++;
                     });
                 } else {
-                    utility.data.bindedBot.sendMessage({
+                    utility.sendMessage({
                         to: information.channelID,
                         message: "Filtragem por usuário ainda não está disponível, tudo bem? :heart:"
                     });
@@ -49,3 +49,4 @@ utility.commandAdd({
         }
     }
 });
+*/

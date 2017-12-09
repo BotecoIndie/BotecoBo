@@ -5,7 +5,7 @@ utility.commandAdd({
     description: "É.",
     staffOnly: false,
     callback: function (args, information) {
-        utility.data.bindedBot.sendMessage({
+        utility.sendMessage({
             to: information.channelID,
             message: "https://streamable.com/joqi8"
         });

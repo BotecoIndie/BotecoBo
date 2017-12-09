@@ -13,7 +13,7 @@ utility.commandAdd({
         for (var i = 0; i < args.length; i++) {
             msg += args[i] + " ";
         }
-        utility.data.bindedBot.sendMessage({
+        utility.sendMessage({
             to: information.channelID,
             message: msg
         });

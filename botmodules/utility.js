@@ -6,7 +6,7 @@ var jsonfile = require("jsonfile"),
 var exports = module.exports = {
     data: {
         colors: [
-        "285141552056238090",
+    /*    "285141552056238090",
         "285141479641317377",
         "285138761690382357",
         "285138592257277953",
@@ -21,7 +21,7 @@ var exports = module.exports = {
         "284838028390825984",
         "284837475011002368",
         "284838098544754688",
-        "285141212250243072"
+        "285141212250243072"*/
         ],
         commands: [],
         listeners: [],
@@ -37,8 +37,8 @@ var exports = module.exports = {
         exports.data.listeners.push(listener);
     },
     reply: function(text, information) {
-        exports.data.bindedBot.sendMessage({
-            to: information.channelID,
+        exports.sendMessage({
+            to: information.channel,
             message: text
         });
     },
@@ -63,18 +63,20 @@ var exports = module.exports = {
         exports.data.currentServer = serverID;
     },
     violation: function (information) {
-        exports.data.bindedBot.sendMessage({
-            to: information.channelID,
+        exports.sendMessage({
+            to: information.channel,
             message: "`Você não tem permissão pra isso, bobinho`:heart:"
         });
     },
     updateColorFile: function () {
+
         const quadSize = 200;
         const imgWidth = quadSize * Math.ceil(Math.sqrt(exports.data.colors.length));
         const hLen = Math.sqrt(exports.data.colors.length);
         const imgHeight = quadSize * Math.ceil((exports.data.colors.length / 2.0 != Math.floor(exports.data.colors.length / 2.0)) ? hLen - 1 : hLen);
         const margin = 48;
         var image = new jimp(imgWidth, imgHeight, function (err, image) {
+
             if (err) {
                 throw err;
             } else {
@@ -168,109 +170,101 @@ var exports = module.exports = {
         });
     },
     checkRole: function (roleName, userID) {
-           var rl = exports.getRolePropertiesByName(roleName);
-            var idx = exports.getMemberRoles(userID).indexOf(rl.id);
-            return idx!=-1;
+      var found = false;
+            var roles = exports.getMemberRoles(userID);
+            for(var i = 0; i < roles.length; i++)
+            {
+              if (exports.roleGetNameByID(roles[i]).toLowerCase() == roleName.toLowerCase())
+              {
+                found = 1;
+                break;
+              }
+            }
+            return found;
         },
     changeUserColor: function (uid, role) {
-        var userRoles = exports.getMemberRoles(uid);
-        var roleColor = {
-            serverID: exports.data.currentServer,
-            userID: uid,
-            roleID: exports.roleGetIDByName(role)
+          var member = exports.data.bindedBot.guilds.get(exports.data.currentServer).member(uid);
+          var userRoles = exports.getMemberRoles(uid);
+          var roleColor = {
+              serverID: exports.data.currentServer,
+              userID: uid,
+              roleID: exports.roleGetIDByName(role)
+          };
+
+          if (roleColor.roleID == undefined)
+          {
+            return;
+          }
+          for (i = 0; i < userRoles.length; ++i) {
+            var obj = {
+              serverID: exports.data.currentServer,
+              userID: uid,
+              roleID: userRoles[i]
+          };
+            if (exports.data.colors.indexOf(userRoles[i]) != -1) {
+
+              member.removeRole(obj.roleID).then(function(){console.log('Sucesso')});
+          }
+
+          if (role.toLowerCase() != "staff" && exports.data.colors.indexOf(roleColor.roleID) != -1)
+          {
+            member.addRole(roleColor.roleID).then(function(){console.log('Sucesso')});
+          }
         };
-
-        if (roleColor.roleID == undefined)
-        {
-          return;
-        }
-        for (i = 0; i < userRoles.length; ++i) {
-
-          if (exports.data.colors.indexOf(userRoles[i]) != -1) {
-              var obj = {
-                serverID: exports.data.currentServer,
-                userID: uid,
-                roleID: userRoles[i]
-            };
-            exports.data.bindedBot.removeFromRole(obj, function (err, res) {
-              if (err) {
-                console.log(JSON.stringify(obj));
-                throw err;
-              }
-          });
-        }
-      }
-      if (role.toLowerCase() != "staff" && exports.data.colors.indexOf(roleColor.roleID) != -1)
-        {
-          exports.data.bindedBot.addToRole(roleColor, function (err, res) {
-            if (err) {
-              throw err;
-              }
-        });
-      }
     },
     output: function (text) {
-        exports.data.bindedBot.sendMessage({
+        exports.sendMessage({
             to: "286314605163053057", // Bot Output Channel ID
             message: text
         })
     },
     roleGetNameByID: function (roleID) {
-        var roles = exports.data.bindedBot.servers[exports.data.currentServer]["roles"];
-        var res = undefined;
-        res = roles[(typeof (roleID) != "string") ? roleID.toString() : roleID];
-        var result = undefined;
-        if (res) {
-            result = res.name;
-        }
-        return result;
+        return exports.data.bindedBot.guilds.get(exports.data.currentServer).roles.get(roleID).name;
     },
     roleGetIDByName: function (roleName) {
-        var roles = exports.data.bindedBot.servers[exports.data.currentServer]["roles"];
-        var keys = Object.keys(roles);
+        var roles = exports.data.bindedBot.guilds.get(exports.data.currentServer).roles.array();
         var rid = undefined;
-        for (i = 0; i < keys.length; ++i) {
-            if (roles[keys[i]].name.toLowerCase() == roleName.toLowerCase()) {
-                rid = roles[keys[i]].id;
+        for (i = 0; i < roles.length; ++i) {
+            if (roles[i].name.toLowerCase() == roleName.toLowerCase()) {
+                rid = roles[i].id;
                 break;
             }
         }
         return rid;
     },
     memberGetIDByName: function (username) {
-        console.log(exports.data.bindedBot.users);
-        var keys = Object.keys(exports.data.bindedBot.servers[exports.data.currentServer].members);
-        for (i = 0; i < keys.length;++i ) {
-             var member = exports.data.bindedBot.servers[exports.data.currentServer].members[keys[i]];
-            if(member.nick) {
-                if(member.nick == username) {
-                    return member.id;
-                }
-            }
+      var members = exports.data.bindedBot.guilds.get(exports.data.currentServer).members.array();
+      for(var i = 0; i < members.length;i++)
+      {
+        if (members[i].user.username.toLowerCase() == username.toLowerCase())
+        {
+          return members[i].id;
         }
-        keys = Object.keys(exports.data.bindedBot.users);
-        for (i = 0; i < keys.length; ++i) {
-            var member = exports.data.bindedBot.users[keys[i]];
-            console.log(member);
-            if (member) {
-                if (member.username == username) {
-                    return member.id;
-                }
-            }
-        }
-        return undefined;
+      }
     },
     userGetRoles: function (userID) {
-        return exports.data.bindedBot.servers[exports.data.currentServer].members[userID].roles;
+      var arr = [];
+        var a = exports.data.bindedBot.guilds.get(exports.data.currentServer).members.get(userID).roles.array();
+        for(var i = 0; i < a.length; i++)
+        {
+          arr.push(a[i].id);
+        }
+        return arr;
     },
     getMemberRoles: function (userID) {
-        return exports.data.bindedBot.servers[exports.data.currentServer].members[userID].roles;
+      var arr = [];
+        var a = exports.data.bindedBot.guilds.get(exports.data.currentServer).members.get(userID).roles.array();
+        for(var i = 0; i < a.length; i++)
+        {
+          arr.push(a[i].id);
+        }
+        return arr;
     },
     getRolePropertiesByName: function (roleName) {
         return exports.getRolePropertiesByID(exports.roleGetIDByName(roleName));
     },
     getRolePropertiesByID: function (roleID) {
-        return exports.data.bindedBot.servers[exports.data.currentServer].roles[roleID];
+        return exports.data.bindedBot.guilds.get(exports.data.currentServer).roles.get(roleID);
     },
     isUserMention: function (text) {
         if (text.substr(0, 2) == "<@") {
@@ -280,7 +274,7 @@ var exports = module.exports = {
         return false;
     },
     getMemberProperties: function (id) {
-        return exports.data.bindedBot.servers[exports.data.currentServer].members[id];
+        return exports.data.bindedBot.guilds.get(exports.data.currentServer).members.get(id);
     },
     convertMentionToUser: function (text) {
         var begIndex = undefined;
@@ -295,5 +289,25 @@ var exports = module.exports = {
         console.log("result: " + text.substr(begIndex, endIndex));
         console.log("sauce:  " + text);
         return exports.getMemberProperties(text.substring(begIndex, endIndex));
+    },
+    sendMessage: function (msg) {
+      console.log(msg.message);
+      if (typeof(msg.to) == 'string')
+      {
+        console.log(exports.data.currentServer);
+        var channel = exports.data.bindedBot.guilds.get(exports.data.currentServer).channels.get(msg.to);
+        if (channel != undefined)
+        {
+          channel.send(msg.message);
+        }
+        else
+        {
+          exports.data.bindedBot.guilds.get(exports.data.currentServer).members.get(msg.to).send(msg.message);
+        }
+      }
+      else
+      {
+          msg.to.send(msg.message);
+      }
     }
 };

@@ -36,7 +36,7 @@ utility.commandAdd({
             }
             str += "```";
 
-            utility.data.bindedBot.sendMessage({
+            utility.sendMessage({
                 to: information.userID,
                 message: str
             });

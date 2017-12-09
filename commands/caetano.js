@@ -5,7 +5,7 @@ utility.commandAdd({
     description: "Envia o vídeo do Caetano Veloso. Uso: !caetano",
     staffOnly: false,
     callback: function (args, information) {
-        utility.data.bindedBot.sendMessage({
+        utility.sendMessage({
             to: information.channelID,
             message: "https://www.youtube.com/watch?v=-MK1q9fZjeI"
         });
