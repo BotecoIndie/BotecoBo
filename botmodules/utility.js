@@ -43,6 +43,11 @@ var exports = module.exports = {
         });
     },
     saveData: function (fname) {
+        var dir = path.dirname(fname);
+        if (!fs.existsSync(dir))
+        {
+          fs.mkdirSync(dir);
+        }
         var object = {};
         object["colors"] = exports.data.colors;
         object["kickStanleyTimes"] = exports.data.kickStanleyTimes;
@@ -50,6 +55,11 @@ var exports = module.exports = {
         fs.writeFile(path.resolve(exports.data.dir, fname), JSON.stringify(object, null, 4));
     },
     loadData: function (fname) {
+        var dir = path.dirname(fname);
+        if (!fs.existsSync(dir))
+        {
+          fs.mkdirSync(dir);
+        }
         var ex = fs.existsSync(path.resolve(exports.data.dir, fname));
         if (ex) {
             var data = fs.readFileSync(path.resolve(exports.data.dir, fname));
@@ -57,6 +67,9 @@ var exports = module.exports = {
             exports.data.colors = jsonP.colors;
             exports.data.roles = jsonP.roles;
             exports.data.kickStanleyTimes = jsonP.kickStanleyTimes;
+        }
+        else {
+          fs.writeFileSync(fname,"{}");
         }
     },
     bindToServer: function (serverID) {
