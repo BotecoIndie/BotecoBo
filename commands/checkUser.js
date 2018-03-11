@@ -2,7 +2,7 @@ var utility = require("../botmodules/utility.js");
 
 utility.commandAdd({
     name: "checkUser",
-    description: "Checa o usuário selecionado. Uso: !checkUser Usuário",
+    description: "Checa o usuário selecionado. Uso: !checkUser userId",
     staffOnly: true,
     callback: function (args, information) {
         if (!utility.checkRole("Staff", information.userID))
@@ -13,8 +13,9 @@ utility.commandAdd({
         
         if (args[0])
         {
-            var mid = utility.memberGetIDByName(args[0]);
+            var mid = args[0];
             var date = utility.data.bindedBot.guilds.get(utility.data.currentServer).members.get(mid).user.createdAt;
+            var username = utility.data.bindedBot.guilds.get(utility.data.currentServer).members.get(mid).user.username;
             var dd = date.getDate();
             var mm = date.getMonth() + 1; //January is 0!
 
