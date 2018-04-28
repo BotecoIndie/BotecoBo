@@ -1,7 +1,10 @@
 {
-    "name": "BotecoBo",
+    "name": "botecobo",
     "version": "0.0.1",
     "main": "index.js",
+    "scripts":{
+        "start": "node ./node_modules/.bin/pm2-runtime index.js -i max"
+    },
     "dependencies": {
         "cluster": "*",
         "discord.js": "^11.2.1",
@@ -9,6 +12,7 @@
         "jimp": "*",
         "jsonfile": "*",
         "nodemon": "^1.12.1",
-        "pastebin-js": "*"
+        "pastebin-js": "*",
+        "pm2": "^2.10.3"
     }
 }
