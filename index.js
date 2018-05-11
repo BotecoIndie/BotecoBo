@@ -76,7 +76,7 @@ utility.data.bindedBot.on('message', function (message) {
 
 utility.data.bindedBot.on('guildMemberAdd', function(member){
   utility.sendMessage({
-      to: "388729820323905547",
+      to: "444284949894266900",
       message: "Oi, <@!" + member.id + ">" + " seja bem-vindo ao BotecoIndie! :heart: Que tal falar um pouco de você no <#388729820323905547> para liberar acesso total ao servidor? Estamos ansiosos para ter você conosco!"
   });
     utility.sendMessage({
