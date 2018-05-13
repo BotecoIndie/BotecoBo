@@ -77,11 +77,23 @@ utility.data.bindedBot.on('message', function (message) {
 utility.data.bindedBot.on('guildMemberAdd', function(member){
   utility.sendMessage({
       to: "444284949894266900",
-      message: "Oi, <@!" + member.id + ">" + " seja bem-vindo ao BotecoIndie! :heart: Que tal falar um pouco de você no <#388729820323905547> para liberar acesso total ao servidor? Estamos ansiosos para ter você conosco!"
+      message: "Oi, <@!" + member.id + ">" + " seja bem-vindo ao BotecoIndie! :heart: Que tal falar um pouco de você no <#444284949894266900>? Estamos ansiosos para ter você conosco!"
   });
+    var mid = member.id;
+    var date = utility.data.bindedBot.guilds.get(utility.data.currentServer).members.get(mid).user.createdAt;
+    var dd = date.getDate();
+    var mm = date.getMonth() + 1; //January is 0!
+    var yyyy = date.getFullYear();
+    if (dd < 10) {
+        dd = '0' + dd;
+    }
+    if (mm < 10) {
+        mm = '0' + mm;
+    }
+    var dateStr = dd + '/' + mm + '/' + yyyy;
     utility.sendMessage({
         to: "286314605163053057",
-        message: "<@!" + member.id + ">" + " entrou"
+        message: "<@!" + member.id + ">" + " entrou. Data de criação da conta: " + dateStr
     });
 });
 
