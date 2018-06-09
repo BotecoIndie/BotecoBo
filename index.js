@@ -107,7 +107,7 @@ utility.data.bindedBot.on('guildMemberRemove', function(member){
       utility.saveData("./content/data.json");
   } else {
       utility.sendMessage({
-          to: "285851488625098752",
+          to: "286314605163053057",
           message: "<@!" + member.id + ">" + " foi embora... <:badday:273230212651548672>"
       });
   }
