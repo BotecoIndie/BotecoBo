@@ -185,7 +185,7 @@ var exports = module.exports = {
     checkRole: function (roleName, userID) {
         if (roleName.toLowerCase() == "staff")
         {
-            roleName = "Covileiros";
+           // roleName = "Covileiros";
         }
       var found = false;
             var roles = exports.getMemberRoles(userID);
