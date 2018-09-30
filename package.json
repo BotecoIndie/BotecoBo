@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "main": "index.js",
     "scripts":{
-        "start": "node ./node_modules/.bin/pm2-runtime index.js -i max"
+        "start": "node index.js"
     },
     "dependencies": {
         "cluster": "*",
