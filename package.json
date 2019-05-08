@@ -2,16 +2,17 @@
     "name": "botecobo",
     "version": "0.0.1",
     "main": "index.js",
-    "scripts":{
+    "scripts": {
         "start": "node index.js"
     },
     "dependencies": {
         "cluster": "*",
         "discord.js": "^11.2.1",
+        "express": "^4.16.4",
         "got": "*",
         "jimp": "*",
         "jsonfile": "*",
-        "nodemon": "^1.12.1",
+        "nodemon": "^1.19.0",
         "pastebin-js": "*",
         "pm2": "^2.10.3"
     }
